@@ -32,6 +32,8 @@ final class MoviesListViewController: UIViewController, StoryboardInstantiable, 
         setupBehaviours()
         bind(to: viewModel)
         viewModel.viewDidLoad()
+        viewModel.didLoadMovies()
+
     }
 
     private func bind(to viewModel: MoviesListViewModel) {

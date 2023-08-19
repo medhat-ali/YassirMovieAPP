@@ -17,6 +17,7 @@ protocol MoviesListViewModelInput {
     func viewDidLoad()
     func didLoadNextPage()
     func didSearch(query: String)
+    func didLoadMovies()
     func didCancelSearch()
     func showQueriesSuggestions()
     func closeQueriesSuggestions()
@@ -148,6 +149,10 @@ extension DefaultMoviesListViewModel {
         update(movieQuery: MovieQuery(query: query))
     }
 
+    func didLoadMovies() {
+        update(movieQuery: MovieQuery(query: ""))
+    }
+    
     func didCancelSearch() {
         moviesLoadTask?.cancel()
     }

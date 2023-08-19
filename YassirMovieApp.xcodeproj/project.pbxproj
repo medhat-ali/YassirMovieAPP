@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1F02DE3522F8507500E40C3A /* LoginSceneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F02DE3422F8507500E40C3A /* LoginSceneUITests.swift */; };
 		1F0CEFCF23436B67004141FA /* ConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0CEFCE23436B67004141FA /* ConnectionError.swift */; };
 		1F0CEFD023436B8B004141FA /* ConnectionError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F0CEFCE23436B67004141FA /* ConnectionError.swift */; };
 		1F16031D2426919300C173C6 /* AppFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1F16031C2426919300C173C6 /* AppFlowCoordinator.swift */; };
@@ -88,6 +87,7 @@
 		75E3455A2A90C58C002DA450 /* BackButtonEmptyTitleNavigationBarBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E345482A90C58C002DA450 /* BackButtonEmptyTitleNavigationBarBehavior.swift */; };
 		75E3455C2A90C5A7002DA450 /* MoviesSceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E3455B2A90C5A7002DA450 /* MoviesSceneDIContainer.swift */; };
 		75E3455E2A90C61D002DA450 /* FetchRecentMovieQueriesUseCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E3455D2A90C61D002DA450 /* FetchRecentMovieQueriesUseCase.swift */; };
+		75E345612A90EE8A002DA450 /* MoviesSceneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75E345602A90EE8A002DA450 /* MoviesSceneUITests.swift */; };
 		FC2B715C2156FF93002BD59E /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B715B2156FF93002BD59E /* AppAppearance.swift */; };
 		FC740818216555C500FE52A5 /* UserDefaultsMoviesQueriesStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC740817216555C500FE52A5 /* UserDefaultsMoviesQueriesStorage.swift */; };
 /* End PBXBuildFile section */
@@ -111,7 +111,6 @@
 
 /* Begin PBXFileReference section */
 		1F02DE3222F8507500E40C3A /* YassirMovieAppUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = YassirMovieAppUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		1F02DE3422F8507500E40C3A /* LoginSceneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginSceneUITests.swift; sourceTree = "<group>"; };
 		1F02DE3622F8507500E40C3A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		1F0CEFCE23436B67004141FA /* ConnectionError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConnectionError.swift; sourceTree = "<group>"; };
 		1F16031C2426919300C173C6 /* AppFlowCoordinator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppFlowCoordinator.swift; sourceTree = "<group>"; };
@@ -187,6 +186,7 @@
 		75E345482A90C58C002DA450 /* BackButtonEmptyTitleNavigationBarBehavior.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackButtonEmptyTitleNavigationBarBehavior.swift; sourceTree = "<group>"; };
 		75E3455B2A90C5A7002DA450 /* MoviesSceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSceneDIContainer.swift; sourceTree = "<group>"; };
 		75E3455D2A90C61D002DA450 /* FetchRecentMovieQueriesUseCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FetchRecentMovieQueriesUseCase.swift; sourceTree = "<group>"; };
+		75E345602A90EE8A002DA450 /* MoviesSceneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSceneUITests.swift; sourceTree = "<group>"; };
 		FC2B715B2156FF93002BD59E /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
 		FC740817216555C500FE52A5 /* UserDefaultsMoviesQueriesStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsMoviesQueriesStorage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -229,17 +229,9 @@
 		1F02DE3D22F876B500E40C3A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
-				1F02DE3E22F876C100E40C3A /* LoginScene */,
+				75E3455F2A90EE6E002DA450 /* MoviesScene */,
 			);
 			path = Presentation;
-			sourceTree = "<group>";
-		};
-		1F02DE3E22F876C100E40C3A /* LoginScene */ = {
-			isa = PBXGroup;
-			children = (
-				1F02DE3422F8507500E40C3A /* LoginSceneUITests.swift */,
-			);
-			path = LoginScene;
 			sourceTree = "<group>";
 		};
 		1F1FC48422E3693100BCBA8D /* Network */ = {
@@ -574,9 +566,9 @@
 		75E3452D2A90C58C002DA450 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				75E345332A90C58C002DA450 /* MoviesListViewController.swift */,
 				75E3452E2A90C58C002DA450 /* MoviesListViewController.storyboard */,
 				75E3452F2A90C58C002DA450 /* MoviesListTableView */,
-				75E345332A90C58C002DA450 /* MoviesListViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -684,6 +676,14 @@
 				75E345482A90C58C002DA450 /* BackButtonEmptyTitleNavigationBarBehavior.swift */,
 			);
 			path = Behaviors;
+			sourceTree = "<group>";
+		};
+		75E3455F2A90EE6E002DA450 /* MoviesScene */ = {
+			isa = PBXGroup;
+			children = (
+				75E345602A90EE8A002DA450 /* MoviesSceneUITests.swift */,
+			);
+			path = MoviesScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -830,8 +830,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1F02DE3522F8507500E40C3A /* LoginSceneUITests.swift in Sources */,
 				1F57F8D423C656F600981E09 /* AccessibilityIdentifier.swift in Sources */,
+				75E345612A90EE8A002DA450 /* MoviesSceneUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -965,7 +965,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = YassirMovieAppUITests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/YassirMovieAppUITests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -988,7 +988,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = YassirMovieAppUITests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/YassirMovieAppUITests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1189,7 +1189,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = YassirMovieApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/YassirMovieAppTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1212,7 +1212,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = YassirMovieApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/YassirMovieAppTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1326,7 +1326,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = YassirMovieApp/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/YassirMovieAppTests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1348,7 +1348,7 @@
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = "";
-				INFOPLIST_FILE = YassirMovieAppUITests/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/YassirMovieAppUITests/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 12.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

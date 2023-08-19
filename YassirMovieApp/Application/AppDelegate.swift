@@ -22,11 +22,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             navigationController: navigationController,
             appDIContainer: appDIContainer
         )
-        if #available(iOS 15.0.0, *) {
-            appFlowCoordinator?.start()
-        } else {
-            // Fallback on earlier versions
-        }
+            
+        appFlowCoordinator?.start()
         window?.makeKeyAndVisible()
     
         return true

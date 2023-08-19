@@ -12,7 +12,6 @@
 - [Quick Start](#quick-start)
     - [Prerequisites](#Prerequisites)
     - [Getting started with App](#getting-start)
-    - [Client server communication](#Client-server-communication)
 - [Project structure](#Project-structure)
 - [project root folder](#project-root-folder)
 - [Additional info](#info)

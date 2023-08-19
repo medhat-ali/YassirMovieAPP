@@ -25,6 +25,24 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         self.dependencies = dependencies
     }
     
+    // MARK: - Repositories
+    func makeMoviesRepository() -> MoviesRepository {
+        DefaultMoviesRepository(
+            dataTransferService: dependencies.apiDataTransferService,
+            cache: moviesResponseCache
+        )
+    }
+    func makeMoviesQueriesRepository() -> MoviesQueriesRepository {
+        DefaultMoviesQueriesRepository(
+            moviesQueriesPersistentStorage: moviesQueriesStorage
+        )
+    }
+    func makePosterImagesRepository() -> PosterImagesRepository {
+        DefaultPosterImagesRepository(
+            dataTransferService: dependencies.imageDataTransferService
+        )
+    }
+    
     // MARK: - Use Cases
     func makeSearchMoviesUseCase() -> SearchMoviesUseCase {
         DefaultSearchMoviesUseCase(
@@ -44,32 +62,9 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
-    // MARK: - Repositories
-    func makeMoviesRepository() -> MoviesRepository {
-        DefaultMoviesRepository(
-            dataTransferService: dependencies.apiDataTransferService,
-            cache: moviesResponseCache
-        )
-    }
-    func makeMoviesQueriesRepository() -> MoviesQueriesRepository {
-        DefaultMoviesQueriesRepository(
-            moviesQueriesPersistentStorage: moviesQueriesStorage
-        )
-    }
-    func makePosterImagesRepository() -> PosterImagesRepository {
-        DefaultPosterImagesRepository(
-            dataTransferService: dependencies.imageDataTransferService
-        )
-    }
+  
     
-    // MARK: - Movies List
-    func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController {
-        MoviesListViewController.create(
-            with: makeMoviesListViewModel(actions: actions),
-            posterImagesRepository: makePosterImagesRepository()
-        )
-    }
-    
+    // MARK: - Movies List View model and controller
     func makeMoviesListViewModel(actions: MoviesListViewModelActions) -> MoviesListViewModel {
         DefaultMoviesListViewModel(
             searchMoviesUseCase: makeSearchMoviesUseCase(),
@@ -77,13 +72,16 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
-    // MARK: - Movie Details
-    func makeMoviesDetailsViewController(movie: Movie) -> UIViewController {
-        MovieDetailsViewController.create(
-            with: makeMoviesDetailsViewModel(movie: movie)
+    func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController {
+        MoviesListViewController.create(
+            with: makeMoviesListViewModel(actions: actions),
+            posterImagesRepository: makePosterImagesRepository()
         )
     }
     
+    
+    
+    // MARK: - Movie Details View model and controller
     func makeMoviesDetailsViewModel(movie: Movie) -> MovieDetailsViewModel {
         DefaultMovieDetailsViewModel(
             movie: movie,
@@ -91,7 +89,15 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
-    // MARK: - Movies Queries Suggestions List
+    func makeMoviesDetailsViewController(movie: Movie) -> UIViewController {
+        MovieDetailsViewController.create(
+            with: makeMoviesDetailsViewModel(movie: movie)
+        )
+    }
+    
+    
+    
+    // MARK: - Movies Queries Suggestions List 
     func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController {
         if #available(iOS 13.0, *) { // SwiftUI
             let view = MoviesQueryListView(
