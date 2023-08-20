@@ -15,22 +15,6 @@ class SearchMoviesUseCaseTests: XCTestCase {
         case failedFetching
     }
     
-    class MoviesQueriesRepositoryMock: MoviesQueriesRepository {
-        var recentQueries: [MovieQuery] = []
-        var fetchCompletionCallsCount = 0
-        
-        func fetchRecentsQueries(
-            maxCount: Int,
-            completion: @escaping (Result<[MovieQuery], Error>) -> Void
-        ) {
-            completion(.success(recentQueries))
-            fetchCompletionCallsCount += 1
-        }
-        func saveRecentQuery(query: MovieQuery, completion: @escaping (Result<MovieQuery, Error>) -> Void) {
-            recentQueries.append(query)
-        }
-    }
-    
     class MoviesRepositoryMock: MoviesRepository {
         var result: Result<MoviesPage, Error>
         var fetchCompletionCallsCount = 0
@@ -55,13 +39,11 @@ class SearchMoviesUseCaseTests: XCTestCase {
     func testSearchMoviesUseCase_whenSuccessfullyFetchesMoviesForQuery_thenQueryIsSavedInRecentQueries() {
         // given
         var useCaseCompletionCallsCount = 0
-        let moviesQueriesRepository = MoviesQueriesRepositoryMock()
         let moviesRepository = MoviesRepositoryMock(
             result: .success(SearchMoviesUseCaseTests.moviesPages[0])
         )
         let useCase = DefaultSearchMoviesUseCase(
-            moviesRepository: moviesRepository,
-            moviesQueriesRepository: moviesQueriesRepository
+            moviesRepository: moviesRepository
         )
 
         // when
@@ -76,22 +58,15 @@ class SearchMoviesUseCaseTests: XCTestCase {
             useCaseCompletionCallsCount += 1
         }
         // then
-        var recents = [MovieQuery]()
-        moviesQueriesRepository.fetchRecentsQueries(maxCount: 1) { result in
-            recents = (try? result.get()) ?? []
-        }
-        XCTAssertTrue(recents.contains(MovieQuery(query: "title1")))
+        
         XCTAssertEqual(useCaseCompletionCallsCount, 1)
-        XCTAssertEqual(moviesQueriesRepository.fetchCompletionCallsCount, 1)
-        XCTAssertEqual(moviesRepository.fetchCompletionCallsCount, 1)
     }
     
     func testSearchMoviesUseCase_whenFailedFetchingMoviesForQuery_thenQueryIsNotSavedInRecentQueries() {
         // given
         var useCaseCompletionCallsCountCount = 0
-        let moviesQueriesRepository = MoviesQueriesRepositoryMock()
-        let useCase = DefaultSearchMoviesUseCase(moviesRepository: MoviesRepositoryMock(result: .failure(MoviesRepositorySuccessTestError.failedFetching)),
-                                                 moviesQueriesRepository: moviesQueriesRepository)
+        let useCase = DefaultSearchMoviesUseCase(moviesRepository: MoviesRepositoryMock(result: .failure(MoviesRepositorySuccessTestError.failedFetching))
+        )
         
         // when
         let requestValue = SearchMoviesUseCaseRequestValue(query: MovieQuery(query: "title1"),
@@ -100,12 +75,6 @@ class SearchMoviesUseCaseTests: XCTestCase {
             useCaseCompletionCallsCountCount += 1
         }
         // then
-        var recents = [MovieQuery]()
-        moviesQueriesRepository.fetchRecentsQueries(maxCount: 1) { result in
-            recents = (try? result.get()) ?? []
-        }
-        XCTAssertTrue(recents.isEmpty)
         XCTAssertEqual(useCaseCompletionCallsCountCount, 1)
-        XCTAssertEqual(moviesQueriesRepository.fetchCompletionCallsCount, 1)
     }
 }
