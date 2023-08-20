@@ -4,7 +4,9 @@ final class MovieDetailsViewController: UIViewController, StoryboardInstantiable
 
     @IBOutlet private var posterImageView: UIImageView!
     @IBOutlet private var overviewTextView: UITextView!
-
+    @IBOutlet weak var titleText: UILabel!
+    @IBOutlet weak var releaseDate: UILabel!
+    
     // MARK: - Lifecycle
 
     private var viewModel: MovieDetailsViewModel!
@@ -34,6 +36,8 @@ final class MovieDetailsViewController: UIViewController, StoryboardInstantiable
 
     private func setupViews() {
         title = viewModel.title
+        titleText.text = viewModel.title
+        releaseDate.text = viewModel.releaseDate
         overviewTextView.text = viewModel.overview
         posterImageView.isHidden = viewModel.isPosterImageHidden
         view.accessibilityIdentifier = AccessibilityIdentifier.movieDetailsView

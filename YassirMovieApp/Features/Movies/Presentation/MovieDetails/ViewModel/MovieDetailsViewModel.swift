@@ -6,6 +6,7 @@ protocol MovieDetailsViewModelInput {
 
 protocol MovieDetailsViewModelOutput {
     var title: String { get }
+    var releaseDate: String { get }
     var posterImage: Observable<Data?> { get }
     var isPosterImageHidden: Bool { get }
     var overview: String { get }
@@ -22,6 +23,7 @@ final class DefaultMovieDetailsViewModel: MovieDetailsViewModel {
 
     // MARK: - OUTPUT
     let title: String
+    var releaseDate: String = ""
     let posterImage: Observable<Data?> = Observable(nil)
     let isPosterImageHidden: Bool
     let overview: String
@@ -32,6 +34,9 @@ final class DefaultMovieDetailsViewModel: MovieDetailsViewModel {
         mainQueue: DispatchQueueType = DispatchQueue.main
     ) {
         self.title = movie.title ?? ""
+        if let releaseDate = movie.releaseDate {
+            self.releaseDate = dateFormatter.string(from: releaseDate)
+        }
         self.overview = movie.overview ?? ""
         self.posterImagePath = movie.posterPath
         self.isPosterImageHidden = movie.posterPath == nil
@@ -62,3 +67,9 @@ extension DefaultMovieDetailsViewModel {
         }
     }
 }
+
+private let dateFormatter: DateFormatter = {
+    let formatter = DateFormatter()
+    formatter.dateFormat = "yyyy"
+    return formatter
+}()
