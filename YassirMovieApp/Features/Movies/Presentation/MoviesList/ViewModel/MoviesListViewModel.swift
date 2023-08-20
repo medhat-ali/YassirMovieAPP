@@ -4,8 +4,6 @@ struct MoviesListViewModelActions {
     /// Note: if you would need to edit movie inside Details screen and update this Movies List screen with updated movie then you would need this closure:
     /// showMovieDetails: (Movie, @escaping (_ updated: Movie) -> Void) -> Void
     let showMovieDetails: (Movie) -> Void
-    let showMovieQueriesSuggestions: (@escaping (_ didSelect: MovieQuery) -> Void) -> Void
-    let closeMovieQueriesSuggestions: () -> Void
 }
 
 enum MoviesListViewModelLoading {
@@ -16,18 +14,13 @@ enum MoviesListViewModelLoading {
 protocol MoviesListViewModelInput {
     func viewDidLoad()
     func didLoadNextPage()
-    func didSearch(query: String)
     func didLoadMovies()
-    func didCancelSearch()
-    func showQueriesSuggestions()
-    func closeQueriesSuggestions()
     func didSelectItem(at index: Int)
 }
 
 protocol MoviesListViewModelOutput {
-    var items: Observable<[MoviesListItemViewModel]> { get } /// Also we can calculate view model items on demand:  https://github.com/kudoleh/iOS-Clean-Architecture-MVVM/pull/10/files
+    var items: Observable<[MoviesListItemViewModel]> { get }
     var loading: Observable<MoviesListViewModelLoading?> { get }
-    var query: Observable<String> { get }
     var error: Observable<String> { get }
     var isEmpty: Bool { get }
     var screenTitle: String { get }
@@ -144,25 +137,8 @@ extension DefaultMoviesListViewModel {
              loading: .nextPage)
     }
 
-    func didSearch(query: String) {
-        guard !query.isEmpty else { return }
-        update(movieQuery: MovieQuery(query: query))
-    }
-
     func didLoadMovies() {
         update(movieQuery: MovieQuery(query: ""))
-    }
-    
-    func didCancelSearch() {
-        moviesLoadTask?.cancel()
-    }
-
-    func showQueriesSuggestions() {
-        actions?.showMovieQueriesSuggestions(update(movieQuery:))
-    }
-
-    func closeQueriesSuggestions() {
-        actions?.closeMovieQueriesSuggestions()
     }
 
     func didSelectItem(at index: Int) {

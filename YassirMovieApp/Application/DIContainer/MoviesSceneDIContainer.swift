@@ -94,39 +94,6 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
             with: makeMoviesDetailsViewModel(movie: movie)
         )
     }
-    
-    
-    
-    // MARK: - Movies Queries Suggestions List 
-    func makeMoviesQueriesSuggestionsListViewController(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> UIViewController {
-        if #available(iOS 13.0, *) { // SwiftUI
-            let view = MoviesQueryListView(
-                viewModelWrapper: makeMoviesQueryListViewModelWrapper(didSelect: didSelect)
-            )
-            return UIHostingController(rootView: view)
-        } else { // UIKit
-            return MoviesQueriesTableViewController.create(
-                with: makeMoviesQueryListViewModel(didSelect: didSelect)
-            )
-        }
-    }
-    
-    func makeMoviesQueryListViewModel(didSelect: @escaping MoviesQueryListViewModelDidSelectAction) -> MoviesQueryListViewModel {
-        DefaultMoviesQueryListViewModel(
-            numberOfQueriesToShow: 10,
-            fetchRecentMovieQueriesUseCaseFactory: makeFetchRecentMovieQueriesUseCase,
-            didSelect: didSelect
-        )
-    }
-
-    @available(iOS 13.0, *)
-    func makeMoviesQueryListViewModelWrapper(
-        didSelect: @escaping MoviesQueryListViewModelDidSelectAction
-    ) -> MoviesQueryListViewModelWrapper {
-        MoviesQueryListViewModelWrapper(
-            viewModel: makeMoviesQueryListViewModel(didSelect: didSelect)
-        )
-    }
 
     // MARK: - Flow Coordinators
     func makeMoviesSearchFlowCoordinator(navigationController: UINavigationController) -> MoviesSearchFlowCoordinator {

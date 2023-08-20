@@ -39,7 +39,6 @@ final class MoviesListViewController: UIViewController, StoryboardInstantiable, 
     private func bind(to viewModel: MoviesListViewModel) {
         viewModel.items.observe(on: self) { [weak self] _ in self?.updateItems() }
         viewModel.loading.observe(on: self) { [weak self] in self?.updateLoading($0) }
-        viewModel.query.observe(on: self) { [weak self] in self?.updateSearchQuery($0) }
         viewModel.error.observe(on: self) { [weak self] in self?.showError($0) }
     }
 
@@ -62,7 +61,6 @@ final class MoviesListViewController: UIViewController, StoryboardInstantiable, 
     private func setupViews() {
         title = viewModel.screenTitle
         emptyDataLabel.text = viewModel.emptyDataTitle
-        setupSearchController()
     }
 
     private func setupBehaviours() {
@@ -89,20 +87,6 @@ final class MoviesListViewController: UIViewController, StoryboardInstantiable, 
         }
 
         moviesTableViewController?.updateLoading(loading)
-        updateQueriesSuggestions()
-    }
-
-    private func updateQueriesSuggestions() {
-        guard searchController.searchBar.isFirstResponder else {
-            viewModel.closeQueriesSuggestions()
-            return
-        }
-        viewModel.showQueriesSuggestions()
-    }
-
-    private func updateSearchQuery(_ query: String) {
-        searchController.isActive = false
-        searchController.searchBar.text = query
     }
 
     private func showError(_ error: String) {
@@ -111,49 +95,3 @@ final class MoviesListViewController: UIViewController, StoryboardInstantiable, 
     }
 }
 
-// MARK: - Search Controller
-
-extension MoviesListViewController {
-    private func setupSearchController() {
-        searchController.delegate = self
-        searchController.searchBar.delegate = self
-        searchController.searchBar.placeholder = viewModel.searchBarPlaceholder
-        searchController.obscuresBackgroundDuringPresentation = false
-        searchController.searchBar.translatesAutoresizingMaskIntoConstraints = true
-        searchController.searchBar.barStyle = .black
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.searchBar.frame = searchBarContainer.bounds
-        searchController.searchBar.autoresizingMask = [.flexibleWidth]
-        searchBarContainer.addSubview(searchController.searchBar)
-        definesPresentationContext = true
-        if #available(iOS 13.0, *) {
-            searchController.searchBar.searchTextField.accessibilityIdentifier = AccessibilityIdentifier.searchField
-        }
-    }
-}
-
-extension MoviesListViewController: UISearchBarDelegate {
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        guard let searchText = searchBar.text, !searchText.isEmpty else { return }
-        searchController.isActive = false
-        viewModel.didSearch(query: searchText)
-    }
-
-    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
-        viewModel.didCancelSearch()
-    }
-}
-
-extension MoviesListViewController: UISearchControllerDelegate {
-    func willPresentSearchController(_ searchController: UISearchController) {
-        updateQueriesSuggestions()
-    }
-
-    func willDismissSearchController(_ searchController: UISearchController) {
-        updateQueriesSuggestions()
-    }
-
-    func didDismissSearchController(_ searchController: UISearchController) {
-        updateQueriesSuggestions()
-    }
-}
