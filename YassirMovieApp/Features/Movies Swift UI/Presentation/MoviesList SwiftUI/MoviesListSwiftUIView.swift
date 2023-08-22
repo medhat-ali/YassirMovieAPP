@@ -15,7 +15,6 @@ struct MoviesListSwiftUIView: View {
     var body: some View {
         List {
             ForEach(Array(zip(viewModelWrapper.items , viewModelWrapper.items.indices)),  id: \.0) { item, index in
-               // let item = viewModelWrapper.items[index]
                 NavigationLink(destination: MovieDetailsSwiftUIView(title: item.title, subtitle: item.releaseDate, description: item.overview, image: item.posterImagePath ?? "", viewModelWrapper: MoviesDetailsItemCellViewModelWrapper(viewModel: item, posterImagesRepository: viewModelWrapper.posterImagesRepository))) {
                     MoviesListItemCellSwiftUIView(viewModelWrapper: MoviesListItemCellViewModelWrapper(viewModel: item, posterImagesRepository: viewModelWrapper.posterImagesRepository)
                     )
@@ -27,6 +26,7 @@ struct MoviesListSwiftUIView: View {
                 }
             }
         }
+        .accessibilityIdentifier(AccessibilityIdentifier.moviesTableList)
         .navigationBarTitle("Movies")
         .onAppear {
             self.viewModelWrapper.viewModel?.didLoadMovies()

@@ -90,6 +90,7 @@
 		75F450442A94A259009BD125 /* MovieDetailsSwiftUIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F450432A94A259009BD125 /* MovieDetailsSwiftUIView.swift */; };
 		75F450482A951D80009BD125 /* MoviesSwiftUISearchFlowCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F450472A951D80009BD125 /* MoviesSwiftUISearchFlowCoordinator.swift */; };
 		75F4504A2A9520C1009BD125 /* MoviesSwiftUISceneDIContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F450492A9520C1009BD125 /* MoviesSwiftUISceneDIContainer.swift */; };
+		75F4504D2A954476009BD125 /* MoviesSwiftUISceneUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 75F4504C2A954476009BD125 /* MoviesSwiftUISceneUITests.swift */; };
 		FC2B715C2156FF93002BD59E /* AppAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = FC2B715B2156FF93002BD59E /* AppAppearance.swift */; };
 /* End PBXBuildFile section */
 
@@ -178,6 +179,7 @@
 		75F450432A94A259009BD125 /* MovieDetailsSwiftUIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MovieDetailsSwiftUIView.swift; sourceTree = "<group>"; };
 		75F450472A951D80009BD125 /* MoviesSwiftUISearchFlowCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSwiftUISearchFlowCoordinator.swift; sourceTree = "<group>"; };
 		75F450492A9520C1009BD125 /* MoviesSwiftUISceneDIContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSwiftUISceneDIContainer.swift; sourceTree = "<group>"; };
+		75F4504C2A954476009BD125 /* MoviesSwiftUISceneUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesSwiftUISceneUITests.swift; sourceTree = "<group>"; };
 		FC2B715B2156FF93002BD59E /* AppAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppAppearance.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -219,6 +221,7 @@
 		1F02DE3D22F876B500E40C3A /* Presentation */ = {
 			isa = PBXGroup;
 			children = (
+				75F4504B2A95445D009BD125 /* MoviesSwiftUIScene */,
 				75E3455F2A90EE6E002DA450 /* MoviesScene */,
 			);
 			path = Presentation;
@@ -650,6 +653,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		75F4504B2A95445D009BD125 /* MoviesSwiftUIScene */ = {
+			isa = PBXGroup;
+			children = (
+				75F4504C2A954476009BD125 /* MoviesSwiftUISceneUITests.swift */,
+			);
+			path = MoviesSwiftUIScene;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -793,6 +804,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				75F4504D2A954476009BD125 /* MoviesSwiftUISceneUITests.swift in Sources */,
 				1F57F8D423C656F600981E09 /* AccessibilityIdentifier.swift in Sources */,
 				75E345612A90EE8A002DA450 /* MoviesSceneUITests.swift in Sources */,
 			);
@@ -1107,7 +1119,7 @@
 				ENCRYPTION_KEY = "";
 				IMAGE_BASE_URL = "https://image.tmdb.org";
 				INFOPLIST_FILE = "$(SRCROOT)/YassirMovieApp/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1134,7 +1146,7 @@
 				ENCRYPTION_KEY = "";
 				IMAGE_BASE_URL = "https://image.tmdb.org";
 				INFOPLIST_FILE = "$(SRCROOT)/YassirMovieApp/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -1271,7 +1283,7 @@
 				ENCRYPTION_KEY = "";
 				IMAGE_BASE_URL = "https://image.tmdb.org";
 				INFOPLIST_FILE = "$(SRCROOT)/YassirMovieApp/Resources/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

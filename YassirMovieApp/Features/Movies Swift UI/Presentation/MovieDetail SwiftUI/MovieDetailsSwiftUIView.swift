@@ -23,6 +23,7 @@ struct MovieDetailsSwiftUIView: View {
                     .resizable()
                     .frame(width: 160, height: 220)
                     .cornerRadius(20)
+                    .accessibilityIdentifier(AccessibilityIdentifier.movieDetailsView)
                 Text(title)
                     .font(.largeTitle)
                 Text(subtitle)
@@ -37,6 +38,7 @@ struct MovieDetailsSwiftUIView: View {
         }
         .navigationBarTitle(title)
     }
+        
 }
 
 final class MoviesDetailsItemCellViewModelWrapper: ObservableObject {
