@@ -1,14 +1,18 @@
 //
-//  MoviesSceneDIContainer.swift
+//  MoviesSwiftUISceneDIContainer.swift
 //  YassirMovieApp
 //
-//  Created by Medhat Ali on 19/08/2023.
+//  Created by Medhat Ali on 22/08/2023.
 //
 
 import UIKit
 import SwiftUI
 
-final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
+final class MoviesSwiftUISceneDIContainer: MoviesSwiftUISearchFlowCoordinatorDependencies {
+    
+    
+    
+    
     
     struct Dependencies {
         let apiDataTransferService: DataTransferService
@@ -49,14 +53,12 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
     
-    func makeMoviesListViewController(actions: MoviesListViewModelActions) -> MoviesListViewController {
-        MoviesListViewController.create(
-            with: makeMoviesListViewModel(actions: actions),
-            posterImagesRepository: makePosterImagesRepository()
-        )
+    func makeMoviesListSwiftUIViewController(actions: MoviesListViewModelActions) -> MoviesListSwiftUIView? {
+        let viewModelWrapper = MoviesListViewModelWrapper(viewModel: makeMoviesListViewModel(actions: actions), posterImagesRepository: makePosterImagesRepository())
+        return MoviesListSwiftUIView(viewModelWrapper: viewModelWrapper)
+       // let movieView = MoviesListSwiftUIView(viewModel: makeMoviesListViewModel(actions: actions), posterImagesRepository: makePosterImagesRepository())
+       // return movieView
     }
-    
-    
     
     // MARK: - Movie Details View model and controller
     func makeMoviesDetailsViewModel(movie: Movie) -> MovieDetailsViewModel {
@@ -72,14 +74,15 @@ final class MoviesSceneDIContainer: MoviesSearchFlowCoordinatorDependencies {
         )
     }
 
-    // MARK: - Flow Coordinators
-    func makeMoviesSearchFlowCoordinator(navigationController: UINavigationController) -> MoviesSearchFlowCoordinator {
-        MoviesSearchFlowCoordinator(
+    
+    // MARK: - Flow Swift UI Coordinators
+    func makeMoviesSwiftUISearchFlowCoordinator(navigationController: UINavigationController) -> MoviesSwiftUISearchFlowCoordinator {
+        MoviesSwiftUISearchFlowCoordinator(
             navigationController: navigationController,
             dependencies: self
         )
     }
     
-    
 }
+
 

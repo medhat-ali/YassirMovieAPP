@@ -34,4 +34,14 @@ final class AppDIContainer {
         )
         return MoviesSceneDIContainer(dependencies: dependencies)
     }
+    
+    
+    // MARK: - DIContainers of scenes - Movies swift UI
+    func makeMoviesSwiftUISceneDIContainer() -> MoviesSwiftUISceneDIContainer {
+        let dependencies = MoviesSwiftUISceneDIContainer.Dependencies(
+            apiDataTransferService: apiDataTransferService,
+            imageDataTransferService: imageDataTransferService
+        )
+        return MoviesSwiftUISceneDIContainer(dependencies: dependencies)
+    }
 }
