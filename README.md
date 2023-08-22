@@ -19,7 +19,7 @@
 - [License](#license)
 
 # <a name="overview"></a> Overview
-Yassir Movie app is IOS app written in swift
+Yassir Movie app is IOS app written in swift, UIKIT, SwiftUI
 
 # <a name="Description"></a> Description
 Yassir Movie app is responsible for listing movie list and detail written in swift with MVVM and clean code architecture 
@@ -27,9 +27,9 @@ Yassir Movie app is responsible for listing movie list and detail written in swi
 ## Functionality provided
 - Movies list
 - movie detail
+- Dependency injection for all layers (repository, usecases, viewmodels, view controllers)
 
 # <a name="requirements"></a> Requirements
-
 
 - Xcode 14.2
 
@@ -50,6 +50,7 @@ This Quick Start guide will get you up with the app
 - Copy the code from git
 - Build the project
 - Run/Debug
+- to swiftch between UIKIT screens and SwiftUI screens, please check file 'AppFlowCoordinator' function 'start"
 
 ### Environment manager
 
@@ -68,10 +69,11 @@ Complete reference in how to build Clean Code Architecture and MVVM [here](https
 - dependency injection 
 - features 
     - Movie (Data, Domain, Presentation)
+    - Movie with SwiftUI (Presentation)
 - Core 
 - Resources
-- unit test
-- UItest
+- unit test (usecases, viewmodels)
+- UItest (UIKIT screens & SwiftUI screens)
 
 
 # <a name="info"></a> Additional info
