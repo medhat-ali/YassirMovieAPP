@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import UIKit
 
 struct MoviesListSwiftUIView: View {
     
@@ -13,11 +14,16 @@ struct MoviesListSwiftUIView: View {
     
     var body: some View {
         List {
-            ForEach(viewModelWrapper.items,  id: \.title) { item in
-                
+            ForEach(Array(zip(viewModelWrapper.items , viewModelWrapper.items.indices)),  id: \.0) { item, index in
+               // let item = viewModelWrapper.items[index]
                 NavigationLink(destination: MovieDetailsSwiftUIView(title: item.title, subtitle: item.releaseDate, description: item.overview, image: item.posterImagePath ?? "", viewModelWrapper: MoviesDetailsItemCellViewModelWrapper(viewModel: item, posterImagesRepository: viewModelWrapper.posterImagesRepository))) {
                     MoviesListItemCellSwiftUIView(viewModelWrapper: MoviesListItemCellViewModelWrapper(viewModel: item, posterImagesRepository: viewModelWrapper.posterImagesRepository)
                     )
+                } .onAppear {
+                    // load next pages
+                    if index == Int(viewModelWrapper.items.count - 1) {
+                        self.viewModelWrapper.viewModel?.didLoadNextPage()
+                    }
                 }
             }
         }
@@ -45,6 +51,7 @@ final class MoviesListViewModelWrapper: ObservableObject {
         
         viewModel?.items.observe(on: self) { [weak self] values in self?.items = values }
     }
+    
 }
 
 
