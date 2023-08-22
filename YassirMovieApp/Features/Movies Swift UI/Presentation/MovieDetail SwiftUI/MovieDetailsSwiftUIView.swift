@@ -14,27 +14,66 @@ struct MovieDetailsSwiftUIView: View {
     let description: String
     let image: String
 
-    var body: some View {
-        VStack {
-            Image(image)
-                .resizable()
-                .frame(width: 150, height: 150)
-                .cornerRadius(20)
-            Text(title)
-                .font(.largeTitle)
-            Text(subtitle)
-                .font(.title)
-            Text(description)
-                .font(.title)
-           
+    @ObservedObject var viewModelWrapper: MoviesDetailsItemCellViewModelWrapper
 
+    var body: some View {
+        ScrollView {
+            VStack {
+                Image(uiImage: self.viewModelWrapper.imageData ?? UIImage())
+                    .resizable()
+                    .frame(width: 160, height: 220)
+                    .cornerRadius(20)
+                Text(title)
+                    .font(.largeTitle)
+                Text(subtitle)
+                    .font(.title)
+                Text(description)
+                    .font(.title)
+                    .multilineTextAlignment(.leading)
+                
+                
+            }
+            .padding()
         }
-        .padding()
+        .navigationBarTitle(title)
     }
 }
 
-//struct MovieDetailsSwiftUIView_Previews: PreviewProvider {
-//    static var previews: some View {
-//       // MovieDetailsSwiftUIView()
-//    }
-//}
+final class MoviesDetailsItemCellViewModelWrapper: ObservableObject {
+    var viewModel: MoviesListItemViewModel?
+    var posterImagesRepository: PosterImagesRepository?
+    
+    @Published var item: MoviesListItemViewModel?
+    @Published var imageData: UIImage? = UIImage(named: "")
+    
+    private let mainQueue: DispatchQueueType = DispatchQueue.main
+    
+    init(viewModel: MoviesListItemViewModel?,
+         posterImagesRepository: PosterImagesRepository?
+    ) {
+        self.viewModel = viewModel
+        self.posterImagesRepository = posterImagesRepository
+        
+        updatePosterImage(width: 50)
+        
+    }
+    
+    private func updatePosterImage(width: Int) {
+        //posterImageView.image = nil
+        guard let posterImagePath = viewModel?.posterImagePath else { return }
+        
+        _ = posterImagesRepository?.fetchImage(
+            with: posterImagePath,
+            width: width
+        ) { [weak self] result in
+            self?.mainQueue.async {
+                guard self?.viewModel?.posterImagePath == posterImagePath else { return }
+                if case let .success(data) = result {
+                    self?.imageData = UIImage(data: data)
+                }
+            }
+        }
+    }
+    
+}
+

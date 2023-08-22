@@ -15,7 +15,7 @@ struct MoviesListSwiftUIView: View {
         List {
             ForEach(viewModelWrapper.items,  id: \.title) { item in
                 
-                NavigationLink(destination: MovieDetailsSwiftUIView(title: item.title, subtitle: item.releaseDate, description: item.overview, image: item.posterImagePath ?? "")) {
+                NavigationLink(destination: MovieDetailsSwiftUIView(title: item.title, subtitle: item.releaseDate, description: item.overview, image: item.posterImagePath ?? "", viewModelWrapper: MoviesDetailsItemCellViewModelWrapper(viewModel: item, posterImagesRepository: viewModelWrapper.posterImagesRepository))) {
                     MoviesListItemCellSwiftUIView(viewModelWrapper: MoviesListItemCellViewModelWrapper(viewModel: item, posterImagesRepository: viewModelWrapper.posterImagesRepository)
                     )
                 }
