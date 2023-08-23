@@ -56,8 +56,6 @@ final class MoviesSwiftUISceneDIContainer: MoviesSwiftUISearchFlowCoordinatorDep
     func makeMoviesListSwiftUIViewController(actions: MoviesListViewModelActions) -> MoviesListSwiftUIView? {
         let viewModelWrapper = MoviesListViewModelWrapper(viewModel: makeMoviesListViewModel(actions: actions), posterImagesRepository: makePosterImagesRepository())
         return MoviesListSwiftUIView(viewModelWrapper: viewModelWrapper)
-       // let movieView = MoviesListSwiftUIView(viewModel: makeMoviesListViewModel(actions: actions), posterImagesRepository: makePosterImagesRepository())
-       // return movieView
     }
     
     // MARK: - Movie Details View model and controller

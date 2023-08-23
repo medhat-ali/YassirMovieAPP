@@ -12,14 +12,12 @@ protocol MoviesSwiftUISearchFlowCoordinatorDependencies  {
     func makeMoviesListSwiftUIViewController(
         actions: MoviesListViewModelActions
     ) -> MoviesListSwiftUIView?
-   // func makeMoviesDetailsSwiftUIViewController(movie: Movie) -> UIViewController
 }
 
 final class MoviesSwiftUISearchFlowCoordinator {
     
     private weak var navigationController: UINavigationController?
     private let dependencies: MoviesSwiftUISearchFlowCoordinatorDependencies
-   // private weak var moviesListVC: MoviesListSwiftUIView?
 
     init(navigationController: UINavigationController,
          dependencies: MoviesSwiftUISearchFlowCoordinatorDependencies) {
@@ -33,14 +31,9 @@ final class MoviesSwiftUISearchFlowCoordinator {
         let vc = dependencies.makeMoviesListSwiftUIViewController(actions: actions)
 
         navigationController?.pushViewController(UIHostingController(rootView: vc), animated: false)
-      //  moviesListVC = UIHostingController(rootView: vc)
     }
 
     private func showMovieDetails(movie: Movie) {
-//        let vc = dependencies.makeMoviesDetailsViewController(movie: movie)
-//        navigationController?.pushViewController(vc, animated: true)
     }
-
- 
 }
 
